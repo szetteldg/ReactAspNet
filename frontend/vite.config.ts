@@ -12,13 +12,13 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       lib: {
-        entry: path.resolve(__dirname, 'src/greeting-wc.ts'), // Path to your entry point
-        name: 'GreetingWebComponent', // A global variable name for UMD builds
-        fileName: (format) => `greeting-wc.${format}.js`, // Output filename
+        entry: path.resolve(__dirname, 'src/components/greeting-wc.ts'), // Path to your entry point
+        // name: 'GreetingWebComponent', // A global variable name for UMD builds
+        // fileName: (format) => `greeting-wc.${format}.js`, // Output filename
         formats: ['es'], // We'll build an ES Module, the most modern format
       },
   
-      outDir: '../ErpApp/wwwroot/js/webcomponents',
+      outDir: '../wwwroot/js/webcomponents',
   
       // ensure the output directory is empty before building
       emptyOutDir: true,

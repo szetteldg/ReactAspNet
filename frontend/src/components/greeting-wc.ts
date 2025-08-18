@@ -1,5 +1,5 @@
 import r2wc from '@r2wc/react-to-web-component'
-import Greeting from './components/Greeting'
+import Greeting from './Greeting'
 
 const GreetingWC = r2wc(Greeting, {
   props: {
