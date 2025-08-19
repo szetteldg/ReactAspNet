@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
       dts({
         // rollupTypes: true,
         // tsconfigPath: "./tsconfig.app.json",
-        outDir: '../wwwroot/js/webcomponents',
+        outDir: '../ErpMvcApp/wwwroot/webcomponents',
         copyDtsFiles: true,
         insertTypesEntry: true
       }),
@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => {
         fileName: (format) =>  `greetings-comp.${format}.js`,
       },
   
-      outDir: '../wwwroot/js/webcomponents',
+      outDir: '../ErpMvcApp/wwwroot/webcomponents',
   
       // ensure the output directory is empty before building
       emptyOutDir: true,
