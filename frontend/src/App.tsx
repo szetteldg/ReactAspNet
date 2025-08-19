@@ -1,10 +1,8 @@
-import { useState } from 'react'
-import Greeting from './components/greeting/Greeting'
 import './App.css'
+import Greeting from './components/greeting/Greeting'
 import CityPicker from './components/citypicker/CityPicker'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -13,13 +11,8 @@ function App() {
       <Greeting name="Web Compoonent" sayHelloFunc={(msg) => alert(msg)} />
 
       <div>After</div>
-      <CityPicker />
+      <CityPicker cityChanged={(cityName) => alert('Selected city: ' + cityName)} />
       
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
     </>
   )
 }

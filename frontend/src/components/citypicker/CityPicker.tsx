@@ -2,7 +2,11 @@ import { useEffect, useMemo, useState } from 'react'
 import GEOGRAPHY from './data/geography'
 import type { GeographyData } from './data/geography'
 
-export default function CityPicker() {
+export type GeoDataProps = {
+  cityChanged?: (cityName: string) => void
+}
+
+export default function CityPicker({ cityChanged }: GeoDataProps) {
   const [data, setData] = useState<GeographyData>(GEOGRAPHY)
   const continents = useMemo(() => Object.keys(data), [data])
 
@@ -18,6 +22,12 @@ export default function CityPicker() {
       setNewCityName('')
     }
   }, [selectedContinent, selectedCountry])
+
+  useEffect(() => {
+    if (cityChanged) {
+      cityChanged(selectedCity)
+    }
+  }, [selectedCity, cityChanged])
 
   const countries = useMemo(() => {
     if (!selectedContinent) return [] as string[]
