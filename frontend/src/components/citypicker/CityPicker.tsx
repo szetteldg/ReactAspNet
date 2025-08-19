@@ -1,3 +1,4 @@
+import './CityPicker.css'
 import { useEffect, useMemo, useState } from 'react'
 import GEOGRAPHY from './data/geography'
 import type { GeographyData } from './data/geography'
@@ -99,16 +100,16 @@ export default function CityPicker({ cityChanged }: GeoDataProps) {
   }
 
   return (
-    <div style={{ textAlign: 'left', maxWidth: 480, margin: '1rem auto' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+    <div className="citypicker-container">
+      <div className="citypicker-stack">
         <div>
-          <label htmlFor="continent" style={{ display: 'block', marginBottom: 4 }}>Continent</label>
-          <div style={{ position: 'relative', paddingRight: 28 }}>
+          <label htmlFor="continent" className="citypicker-label">Continent</label>
+          <div className="select-wrapper">
             <select
               id="continent"
               value={selectedContinent}
               onChange={e => onContinentChange(e.target.value)}
-              style={{ width: '100%', padding: '0.5rem' }}
+              className="citypicker-select"
             >
               <option value="">Select continent…</option>
               {continents.map(continent => (
@@ -119,14 +120,14 @@ export default function CityPicker({ cityChanged }: GeoDataProps) {
         </div>
 
         <div>
-          <label htmlFor="country" style={{ display: 'block', marginBottom: 4 }}>Country</label>
-          <div style={{ position: 'relative', paddingRight: 28 }}>
+          <label htmlFor="country" className="citypicker-label">Country</label>
+          <div className="select-wrapper">
             <select
               id="country"
               value={selectedCountry}
               onChange={e => onCountryChange(e.target.value)}
               disabled={!selectedContinent}
-              style={{ width: '100%', padding: '0.5rem' }}
+              className="citypicker-select"
             >
               <option value="">Select country…</option>
               {countries.map(country => (
@@ -137,14 +138,14 @@ export default function CityPicker({ cityChanged }: GeoDataProps) {
         </div>
 
         <div>
-          <label htmlFor="city" style={{ display: 'block', marginBottom: 4 }}>City</label>
-          <div style={{ position: 'relative', paddingRight: 28 }}>
+          <label htmlFor="city" className="citypicker-label">City</label>
+          <div className="select-wrapper">
             <select
               id="city"
               value={selectedCity}
               onChange={e => onCityChange(e.target.value)}
               disabled={!selectedCountry}
-              style={{ width: '100%', padding: '0.5rem' }}
+              className="citypicker-select"
             >
               <option value="">Select city…</option>
               {cities.map(city => (
@@ -158,13 +159,7 @@ export default function CityPicker({ cityChanged }: GeoDataProps) {
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
-                style={{
-                  color: '#16a34a',
-                  position: 'absolute',
-                  right: 0,
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                }}
+                className="citypicker-check"
               >
                 <path
                   d="M20 6L9 17l-5-5"
@@ -178,20 +173,12 @@ export default function CityPicker({ cityChanged }: GeoDataProps) {
             )}
           </div>
           {selectedContinent && (
-            <div style={{ marginTop: 6 }}>
+            <div className="add-link-wrapper">
               <button
                 type="button"
                 onClick={openAddCity}
                 disabled={!selectedCountry}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  padding: 0,
-                  color: !selectedCountry ? '#9ca3af' : '#2563eb',
-                  textDecoration: !selectedCountry ? 'none' : 'underline',
-                  cursor: !selectedCountry ? 'not-allowed' : 'pointer',
-                  fontSize: '0.9rem',
-                }}
+                className="add-link"
               >
                 Add a city
               </button>
@@ -202,22 +189,13 @@ export default function CityPicker({ cityChanged }: GeoDataProps) {
           <div
             role="group"
             aria-label="Add city"
-            style={{
-              marginTop: 8,
-              border: 'none',
-              borderRadius: 6,
-              padding: 0,
-              background: 'transparent',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-            }}
+            className="add-panel"
           >
             <input
               id="new-city"
               value={newCityName}
               onChange={e => setNewCityName(e.target.value)}
-              style={{ flex: 1, padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: 4 }}
+              className="add-input"
               placeholder="City name"
             />
             <button
@@ -225,30 +203,14 @@ export default function CityPicker({ cityChanged }: GeoDataProps) {
               onClick={confirmAddCity}
               title="Add city"
               aria-label="Add city"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: 32,                
-                background: 'black',
-                color: '#16a34a',
-                cursor: 'pointer',
-              }}
+              className="add-btn-confirm"
             >Add</button>
             <button
               type="button"
               onClick={cancelAddCity}
               title="Cancel"
               aria-label="Cancel"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: 32,
-                background: 'black',
-                color: 'gainsboro',
-                cursor: 'pointer',
-              }}
+              className="add-btn-cancel"
             >Cancel</button>
           </div>
         )}
