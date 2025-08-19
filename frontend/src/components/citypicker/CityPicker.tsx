@@ -38,44 +38,48 @@ export default function CityPicker() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         <div>
           <label htmlFor="continent" style={{ display: 'block', marginBottom: 4 }}>Continent</label>
-          <select
-            id="continent"
-            value={selectedContinent}
-            onChange={e => onContinentChange(e.target.value)}
-            style={{ width: '100%', padding: '0.5rem' }}
-          >
-            <option value="">Select continent…</option>
-            {continents.map(continent => (
-              <option key={continent} value={continent}>{continent}</option>
-            ))}
-          </select>
+          <div style={{ position: 'relative', paddingRight: 28 }}>
+            <select
+              id="continent"
+              value={selectedContinent}
+              onChange={e => onContinentChange(e.target.value)}
+              style={{ width: '100%', padding: '0.5rem' }}
+            >
+              <option value="">Select continent…</option>
+              {continents.map(continent => (
+                <option key={continent} value={continent}>{continent}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div>
           <label htmlFor="country" style={{ display: 'block', marginBottom: 4 }}>Country</label>
-          <select
-            id="country"
-            value={selectedCountry}
-            onChange={e => onCountryChange(e.target.value)}
-            disabled={!selectedContinent}
-            style={{ width: '100%', padding: '0.5rem' }}
-          >
-            <option value="">Select country…</option>
-            {countries.map(country => (
-              <option key={country} value={country}>{country}</option>
-            ))}
-          </select>
+          <div style={{ position: 'relative', paddingRight: 28 }}>
+            <select
+              id="country"
+              value={selectedCountry}
+              onChange={e => onCountryChange(e.target.value)}
+              disabled={!selectedContinent}
+              style={{ width: '100%', padding: '0.5rem' }}
+            >
+              <option value="">Select country…</option>
+              {countries.map(country => (
+                <option key={country} value={country}>{country}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div>
           <label htmlFor="city" style={{ display: 'block', marginBottom: 4 }}>City</label>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ position: 'relative', paddingRight: 28 }}>
             <select
               id="city"
               value={selectedCity}
               onChange={e => onCityChange(e.target.value)}
               disabled={!selectedCountry}
-              style={{ flex: 1, padding: '0.5rem' }}
+              style={{ width: '100%', padding: '0.5rem' }}
             >
               <option value="">Select city…</option>
               {cities.map(city => (
@@ -89,7 +93,13 @@ export default function CityPicker() {
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
-                style={{ color: '#16a34a' }}
+                style={{
+                  color: '#16a34a',
+                  position: 'absolute',
+                  right: 0,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                }}
               >
                 <path
                   d="M20 6L9 17l-5-5"
