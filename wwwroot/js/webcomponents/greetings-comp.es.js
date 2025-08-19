@@ -27214,8 +27214,8 @@ function HT({ name: N, sayHelloFunc: F }) {
   const [pe, U] = W1.useState(N ?? ""), be = `Hello ${pe}`, De = () => {
     F(be);
   };
-  return /* @__PURE__ */ vp.jsxs("div", { children: [
-    /* @__PURE__ */ vp.jsx("div", { className: "greeting-box", children: be }),
+  return /* @__PURE__ */ vp.jsxs("div", { className: "greeting-box", children: [
+    /* @__PURE__ */ vp.jsx("div", { children: be }),
     /* @__PURE__ */ vp.jsx("input", { value: pe, onChange: (Ie) => U(Ie.target.value) }),
     /* @__PURE__ */ vp.jsx("div", { className: "card", children: /* @__PURE__ */ vp.jsx("button", { onClick: De, children: "Say hello" }) })
   ] });

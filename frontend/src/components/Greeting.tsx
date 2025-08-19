@@ -18,8 +18,8 @@ export default function Greeting({ name, sayHelloFunc }: GreetingProps) {
 	}
 
 	return (
-		<div >
-			<div className="greeting-box">
+		<div className="greeting-box" >
+			<div >
 				{message}
 			</div>
 			
