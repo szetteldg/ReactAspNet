@@ -1,4 +1,4 @@
-type GreetingProps = {
+export type GreetingProps = {
   name?: string
 }
 

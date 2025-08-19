@@ -11,4 +11,3 @@ if (!customElements.get('greeting-wc')) {
   customElements.define('greeting-wc', GreetingWC)
 }
 
-
