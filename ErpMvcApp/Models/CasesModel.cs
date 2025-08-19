@@ -2,6 +2,6 @@
 {
     public class CasesModel
     {
-        public string GreetingsText { get; set; } = string.Empty;
+        public string CityName { get; set; } = string.Empty;
     }
 }

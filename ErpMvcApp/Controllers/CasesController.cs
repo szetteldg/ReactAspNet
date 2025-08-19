@@ -7,14 +7,14 @@ namespace ErpMvcApp.Controllers
     {
         public IActionResult Index()
         {
-            return View(new CasesModel() { GreetingsText = "John Smith" });
+            return View();
         }
 
         [AutoValidateAntiforgeryToken]
         [HttpPost]
-        public IActionResult Index(CasesModel casesModel)
+        public IActionResult Index(CasesModel caseModel)
         {
-            return View(casesModel);
+            return View(caseModel);
         }
     }
 }
