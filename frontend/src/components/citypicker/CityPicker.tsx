@@ -69,18 +69,39 @@ export default function CityPicker() {
 
         <div>
           <label htmlFor="city" style={{ display: 'block', marginBottom: 4 }}>City</label>
-          <select
-            id="city"
-            value={selectedCity}
-            onChange={e => onCityChange(e.target.value)}
-            disabled={!selectedCountry}
-            style={{ width: '100%', padding: '0.5rem' }}
-          >
-            <option value="">Select city…</option>
-            {cities.map(city => (
-              <option key={city} value={city}>{city}</option>
-            ))}
-          </select>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <select
+              id="city"
+              value={selectedCity}
+              onChange={e => onCityChange(e.target.value)}
+              disabled={!selectedCountry}
+              style={{ flex: 1, padding: '0.5rem' }}
+            >
+              <option value="">Select city…</option>
+              {cities.map(city => (
+                <option key={city} value={city}>{city}</option>
+              ))}
+            </select>
+            {selectedCity && (
+              <svg
+                aria-label="Selected"
+                role="img"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                style={{ color: '#16a34a' }}
+              >
+                <path
+                  d="M20 6L9 17l-5-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
+          </div>
         </div>
       </div>
     </div>
