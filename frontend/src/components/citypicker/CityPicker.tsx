@@ -1,22 +1,26 @@
 import { useMemo, useState } from 'react'
 import GEOGRAPHY from './data/geography'
+import type { GeographyData } from './data/geography'
 
 export default function CityPicker() {
-  const continents = useMemo(() => Object.keys(GEOGRAPHY), [])
+  const [data, setData] = useState<GeographyData>(GEOGRAPHY)
+  const continents = useMemo(() => Object.keys(data), [data])
 
   const [selectedContinent, setSelectedContinent] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('')
   const [selectedCity, setSelectedCity] = useState('')
+  const [isAddCityOpen, setIsAddCityOpen] = useState(false)
+  const [newCityName, setNewCityName] = useState('')
 
   const countries = useMemo(() => {
     if (!selectedContinent) return [] as string[]
-    return Object.keys(GEOGRAPHY[selectedContinent])
-  }, [selectedContinent])
+    return Object.keys(data[selectedContinent])
+  }, [selectedContinent, data])
 
   const cities = useMemo(() => {
     if (!selectedContinent || !selectedCountry) return [] as string[]
-    return GEOGRAPHY[selectedContinent][selectedCountry] ?? []
-  }, [selectedContinent, selectedCountry])
+    return data[selectedContinent][selectedCountry] ?? []
+  }, [selectedContinent, selectedCountry, data])
 
   const onContinentChange = (value: string) => {
     setSelectedContinent(value)
@@ -31,6 +35,47 @@ export default function CityPicker() {
 
   const onCityChange = (value: string) => {
     setSelectedCity(value)
+  }
+
+  const openAddCity = () => {
+    if (!selectedContinent || !selectedCountry) return
+    setNewCityName('')
+    setIsAddCityOpen(true)
+  }
+
+  const cancelAddCity = () => {
+    setIsAddCityOpen(false)
+    setNewCityName('')
+  }
+
+  const confirmAddCity = () => {
+    const trimmed = newCityName.trim()
+    if (!trimmed || !selectedContinent || !selectedCountry) {
+      setIsAddCityOpen(false)
+      setNewCityName('')
+      return
+    }
+
+    setData(prev => {
+      const continentData = prev[selectedContinent] || {}
+      const existingCities = continentData[selectedCountry] || []
+
+      if (existingCities.some(c => c.toLowerCase() === trimmed.toLowerCase())) {
+        return prev
+      }
+
+      return {
+        ...prev,
+        [selectedContinent]: {
+          ...continentData,
+          [selectedCountry]: [...existingCities, trimmed],
+        },
+      }
+    })
+
+    setSelectedCity(trimmed)
+    setIsAddCityOpen(false)
+    setNewCityName('')
   }
 
   return (
@@ -112,7 +157,93 @@ export default function CityPicker() {
               </svg>
             )}
           </div>
+          <div style={{ marginTop: 6 }}>
+            <button
+              type="button"
+              onClick={openAddCity}
+              disabled={!selectedContinent || !selectedCountry}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                color: !selectedContinent || !selectedCountry ? '#9ca3af' : '#2563eb',
+                textDecoration: !selectedContinent || !selectedCountry ? 'none' : 'underline',
+                cursor: !selectedContinent || !selectedCountry ? 'not-allowed' : 'pointer',
+                fontSize: '0.9rem',
+              }}
+            >
+              Add a city
+            </button>
+          </div>
         </div>
+        {isAddCityOpen && (
+          <div
+            role="group"
+            aria-label="Add city"
+            style={{
+              marginTop: 8,
+              border: '1px solid #e5e7eb',
+              borderRadius: 6,
+              padding: '0.5rem',
+              background: 'transparent',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+            }}
+          >
+            <input
+              id="new-city"
+              value={newCityName}
+              onChange={e => setNewCityName(e.target.value)}
+              style={{ flex: 1, padding: '0.5rem', border: '1px solid #d1d5db', borderRadius: 4 }}
+              placeholder="City name"
+            />
+            <button
+              type="button"
+              onClick={confirmAddCity}
+              title="Add city"
+              aria-label="Add city"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 32,
+                height: 32,
+                borderRadius: 6,
+                border: '1px solid #d1d5db',
+                background: 'rgba(16,185,129,0.08)',
+                color: '#16a34a',
+                cursor: 'pointer',
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 13l4 4L19 7" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={cancelAddCity}
+              title="Cancel"
+              aria-label="Cancel"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 32,
+                height: 32,
+                borderRadius: 6,
+                border: '1px solid #d1d5db',
+                background: 'rgba(239,68,68,0.08)',
+                color: '#dc2626',
+                cursor: 'pointer',
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 6l12 12M6 18L18 6" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
