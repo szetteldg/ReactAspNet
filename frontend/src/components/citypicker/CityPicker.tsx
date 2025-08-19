@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import GEOGRAPHY from './data/geography'
 import type { GeographyData } from './data/geography'
 
@@ -11,6 +11,13 @@ export default function CityPicker() {
   const [selectedCity, setSelectedCity] = useState('')
   const [isAddCityOpen, setIsAddCityOpen] = useState(false)
   const [newCityName, setNewCityName] = useState('')
+
+  useEffect(() => {
+    if (!selectedContinent || !selectedCountry) {
+      setIsAddCityOpen(false)
+      setNewCityName('')
+    }
+  }, [selectedContinent, selectedCountry])
 
   const countries = useMemo(() => {
     if (!selectedContinent) return [] as string[]
@@ -157,24 +164,26 @@ export default function CityPicker() {
               </svg>
             )}
           </div>
-          <div style={{ marginTop: 6 }}>
-            <button
-              type="button"
-              onClick={openAddCity}
-              disabled={!selectedContinent || !selectedCountry}
-              style={{
-                background: 'none',
-                border: 'none',
-                padding: 0,
-                color: !selectedContinent || !selectedCountry ? '#9ca3af' : '#2563eb',
-                textDecoration: !selectedContinent || !selectedCountry ? 'none' : 'underline',
-                cursor: !selectedContinent || !selectedCountry ? 'not-allowed' : 'pointer',
-                fontSize: '0.9rem',
-              }}
-            >
-              Add a city
-            </button>
-          </div>
+          {selectedContinent && (
+            <div style={{ marginTop: 6 }}>
+              <button
+                type="button"
+                onClick={openAddCity}
+                disabled={!selectedCountry}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  color: !selectedCountry ? '#9ca3af' : '#2563eb',
+                  textDecoration: !selectedCountry ? 'none' : 'underline',
+                  cursor: !selectedCountry ? 'not-allowed' : 'pointer',
+                  fontSize: '0.9rem',
+                }}
+              >
+                Add a city
+              </button>
+            </div>
+          )}
         </div>
         {isAddCityOpen && (
           <div
@@ -182,9 +191,9 @@ export default function CityPicker() {
             aria-label="Add city"
             style={{
               marginTop: 8,
-              border: '1px solid #e5e7eb',
+              border: 'none',
               borderRadius: 6,
-              padding: '0.5rem',
+              padding: 0,
               background: 'transparent',
               display: 'flex',
               alignItems: 'center',
