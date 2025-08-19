@@ -1,5 +1,11 @@
 ﻿@page
 @model PrivacyModel
+
+@section Head
+{
+    <link rel="stylesheet" href="~/js/webcomponents/greetings-web-component.css" asp-append-version="true" />
+}
+
 @{
     ViewData["Title"] = "Privacy Policy";
 }
@@ -8,9 +14,14 @@
 <p>Use this page to detail your site's privacy policy.</p>
 
 
-<greeting-wc />
+<greeting-wc name="ASP.NET" say-hello-func="sayHello" />
 
 @section Scripts {
+    <script>
+          function sayHello(name) {
+            alert(`Hello, ${name}!`);
+        }
+    </script>
     <script type="module" src="~/js/webcomponents/greetings-comp.es.js"></script>
 }
 

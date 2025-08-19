@@ -4,6 +4,7 @@ import Greeting from './Greeting'
 const GreetingWC = r2wc(Greeting, {
   props: {
     name: 'string',
+    sayHelloFunc: 'function',
   },
 })
 
