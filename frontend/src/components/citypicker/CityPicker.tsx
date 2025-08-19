@@ -33,15 +33,18 @@ export default function CityPicker() {
     setSelectedContinent(value)
     setSelectedCountry('')
     setSelectedCity('')
+    cancelAddCity()
   }
 
   const onCountryChange = (value: string) => {
     setSelectedCountry(value)
     setSelectedCity('')
+    cancelAddCity()
   }
 
   const onCityChange = (value: string) => {
     setSelectedCity(value)
+    cancelAddCity()
   }
 
   const openAddCity = () => {
@@ -216,19 +219,12 @@ export default function CityPicker() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: 32,
-                height: 32,
-                borderRadius: 6,
-                border: '1px solid #d1d5db',
-                background: 'rgba(16,185,129,0.08)',
+                height: 32,                
+                background: 'black',
                 color: '#16a34a',
                 cursor: 'pointer',
               }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M5 13l4 4L19 7" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
+            >Add</button>
             <button
               type="button"
               onClick={cancelAddCity}
@@ -238,19 +234,12 @@ export default function CityPicker() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: 32,
                 height: 32,
-                borderRadius: 6,
-                border: '1px solid #d1d5db',
-                background: 'rgba(239,68,68,0.08)',
-                color: '#dc2626',
+                background: 'black',
+                color: 'gainsboro',
                 cursor: 'pointer',
               }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 6l12 12M6 18L18 6" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </button>
+            >Cancel</button>
           </div>
         )}
       </div>
