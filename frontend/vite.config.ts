@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       lib: {
-        entry: path.resolve(__dirname, 'src/components/greeting-wc.ts'), // Path to your entry point
+        entry: path.resolve(__dirname, 'src/components/greeting/greeting-wc.ts'), // Path to your entry point
         formats: ['es'], // We'll build an ES Module, the most modern format
         fileName: (format) =>  `greetings-comp.${format}.js`,
       },
