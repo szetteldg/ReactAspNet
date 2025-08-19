@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <Greeting name="Hello WC " sayHelloFunc={(msg) => alert(msg)} />
+      <Greeting name="Web Compoonent" sayHelloFunc={(msg) => alert(msg)} />
 
 
       <div className="card">

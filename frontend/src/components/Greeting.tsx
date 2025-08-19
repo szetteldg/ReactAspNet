@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import './Greeting.css'
 
 export type GreetingProps = {
@@ -6,7 +8,10 @@ export type GreetingProps = {
 }
 
 export default function Greeting({ name, sayHelloFunc }: GreetingProps) {
-	const message = `Gretting Comp ${name ? `, ${name}` : ''}!`
+
+	const [messageText, setMessageText] = useState<string>(name ?? '');
+
+	const message = `Hello ${messageText}`;
 
 	const handleClick = () => {		
 		sayHelloFunc(message);
@@ -17,6 +22,8 @@ export default function Greeting({ name, sayHelloFunc }: GreetingProps) {
 			<div className="greeting-box">
 				{message}
 			</div>
+			
+			<input value={messageText} onChange={e => setMessageText(e.target.value)} />
 			<div className="card">
 				<button onClick={handleClick}>Say hello</button>
 			</div>
