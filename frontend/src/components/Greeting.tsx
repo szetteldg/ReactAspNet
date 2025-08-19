@@ -19,13 +19,14 @@ export default function Greeting({ name, sayHelloFunc }: GreetingProps) {
 
 	return (
 		<div className="greeting-box" >
+			<div>React UI Component</div>
 			<div >
 				{message}
 			</div>
 			
 			<input value={messageText} onChange={e => setMessageText(e.target.value)} />
 			<div className="card">
-				<button onClick={handleClick}>Say hello</button>
+				<button onClick={handleClick}>Fire Event</button>
 			</div>
 		</div>
 	)

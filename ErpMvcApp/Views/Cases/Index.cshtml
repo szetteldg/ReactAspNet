@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model ErpMvcApp.Models.CasesModel
 
 @section Head
 {
@@ -11,12 +7,37 @@
 
 <h3>Cases</h3>
 
-<greeting-wc name="ASP.NET" say-hello-func="sayHello" />
+<div style="padding-bottom:50px;" >
+    <greeting-wc name="@Model.GreetingsText" say-hello-func="sayHello" />
+</div>
+
+<div >
+
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.GreetingsText)
+        <input id="Submit" type="submit" value="submit" />
+    }
+
+</div>
+
+
+
+
+@if (!string.IsNullOrEmpty(Model.GreetingsText))
+{
+    <p>
+        Posted Data: @Model.GreetingsText
+    </p>
+}
+
 
 @section Scripts {
     <script>
           function sayHello(name) {
-            alert(`Hello, ${name}!`);
+            const hiddenField = document.getElementById('GreetingsText');
+            hiddenField.value = name;
         }
     </script>
     <script type="module" src="~/webcomponents/greetings-comp.es.js"></script>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ErpMvcApp.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ErpMvcApp.Controllers
 {
@@ -6,7 +7,14 @@ namespace ErpMvcApp.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(new CasesModel() { GreetingsText = "John Smith" });
+        }
+
+        [AutoValidateAntiforgeryToken]
+        [HttpPost]
+        public IActionResult Index(CasesModel casesModel)
+        {
+            return View(casesModel);
         }
     }
 }

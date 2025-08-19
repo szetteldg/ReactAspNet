@@ -7,9 +7,11 @@ function App() {
 
   return (
     <>
+
+      <div>Before</div>
       <Greeting name="Web Compoonent" sayHelloFunc={(msg) => alert(msg)} />
 
-
+      <div>After</div>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
