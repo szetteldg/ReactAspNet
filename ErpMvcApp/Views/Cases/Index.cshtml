@@ -1,9 +1,9 @@
 ﻿@model ErpMvcApp.Models.CasesModel
 
-@* @section Head
+@section Head
 {
-    <link rel="stylesheet" href="~/webcomponents/greetings-web-component.css" asp-append-version="true" />
-} *@
+    <link rel="stylesheet" href="~/webcomponents/city-picker.css" asp-append-version="true" />
+}
 
 
 <h3>Cases</h3>
@@ -23,7 +23,7 @@
 
 </div>
 
-@if (!string.IsNullOrEmpty(Model.CityName))
+@if (!string.IsNullOrEmpty(Model?.CityName))
 {
     <p>
         Selected City: @Model.CityName
