@@ -4,10 +4,11 @@ import GEOGRAPHY from './data/geography'
 import type { GeographyData } from './data/geography'
 
 export type GeoDataProps = {
+  title: string,
   cityChanged?: (cityName: string) => void
 }
 
-export default function CityPicker({ cityChanged }: GeoDataProps) {
+export default function CityPicker({ title, cityChanged }: GeoDataProps) {
   const [data, setData] = useState<GeographyData>(GEOGRAPHY)
   const continents = useMemo(() => Object.keys(data), [data])
 
@@ -99,8 +100,10 @@ export default function CityPicker({ cityChanged }: GeoDataProps) {
     setNewCityName('')
   }
 
+  
   return (
     <div className="citypicker-container">
+      <h3>{title}</h3>
       <div className="citypicker-stack">
         <div>
           <label htmlFor="continent" className="citypicker-label">Continent</label>
