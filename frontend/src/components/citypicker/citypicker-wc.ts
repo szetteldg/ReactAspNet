@@ -5,6 +5,7 @@ const CityPickerWC = r2wc(CityPicker, {
   props: {
     title: 'string',
     cityChanged: 'function',
+    canAddCity: 'boolean',
   },
 })
 

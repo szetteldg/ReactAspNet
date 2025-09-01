@@ -5,10 +5,11 @@ import type { GeographyData } from './data/geography'
 
 export type GeoDataProps = {
   title: string,
-  cityChanged?: (cityName: string) => void
+  cityChanged?: (cityName: string) => void,
+  canAddCity?: boolean
 }
 
-export default function CityPicker({ title, cityChanged }: GeoDataProps) {
+export default function CityPicker({ title, cityChanged, canAddCity = true }: GeoDataProps) {
   const [data, setData] = useState<GeographyData>(GEOGRAPHY)
   const continents = useMemo(() => Object.keys(data), [data])
 
@@ -175,7 +176,7 @@ export default function CityPicker({ title, cityChanged }: GeoDataProps) {
               </svg>
             )}
           </div>
-          {selectedContinent && (
+          {selectedContinent && canAddCity && (
             <div className="add-link-wrapper">
               <button
                 type="button"
@@ -188,7 +189,7 @@ export default function CityPicker({ title, cityChanged }: GeoDataProps) {
             </div>
           )}
         </div>
-        {isAddCityOpen && (
+        {isAddCityOpen && canAddCity && (
           <div
             role="group"
             aria-label="Add city"
