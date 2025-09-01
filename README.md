@@ -1,69 +1,28 @@
-# React + TypeScript + Vite
+# Using React based web-component in ASP.NET
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This example app shows how a React based web-component which executed in the browser can be integrated into a statically rendered ASP.NET page. 
 
-Currently, two official plugins are available:
+The app shows a 'city picker', which is dependent on the selected continent and country. The geo information are statically defined, but could also be loaded from the backend. 
+The React library is bundled as part of the web-component. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## React frontend
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The React UI component is exposed as web component which contains properties (title, canAddCity) and events (cityChanged). 
+```html
+ <city-picker title="Pick a city" city-changed="rememberCityName" can-add-city="true" /
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Start the standalone react app with
 ```
+yarn dev
+```
+                      
+Building it copies the React output files to the asp.net root folder ~/wwwroot/webcomponents folder. 
+```
+yarn build
+```
+
+## ASP.NET backend
+Load the ```ErpApp.slnx``` and start it. The Cases controller shows how the city-picker web component can be used. The selected state (city) is kept in a hidden filed until is posted pack as part of a full page reload. 
+
